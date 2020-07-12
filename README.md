@@ -19,7 +19,7 @@ Buatlah sebuah aplikasi nodejs sederhana yang dapat menampilkan nama-nama user y
 * Buka terminal lalu ubah direktori terminal menjadi direktori repositori yang sudah di-clone.
 * Jalankan kode program dengan mengetikkan node coba.js
 
-** Selamat mencoba ^_^
+## Selamat mencoba ^_^
 
 #### Simple GET Request to endpoint
     const axios = require('axios');
