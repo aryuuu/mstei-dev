@@ -15,6 +15,12 @@ Buatlah sebuah aplikasi nodejs sederhana yang dapat menampilkan nama-nama user y
 (http://zetcode.com/javascript/axios/)
 
 ## Petunjuk penggunaan
+* Clone repositori.
+* Buka terminal lalu ubah direktori terminal menjadi direktori repositori yang sudah di-clone.
+* Jalankan kode program dengan mengetikkan node coba.js
+
+** Selamat mencoba ^_^
+
 #### Simple GET Request to endpoint
     const axios = require('axios');
  
