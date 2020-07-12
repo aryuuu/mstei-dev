@@ -15,7 +15,7 @@ Buatlah sebuah aplikasi nodejs sederhana yang dapat menampilkan nama-nama user y
 (http://zetcode.com/javascript/axios/)
 
 ## Petunjuk penggunaan
-# Simple GET Request to endpoint
+#### Simple GET Request to endpoint
     const axios = require('axios');
  
     axios.get('http://webcode.me').then(resp => {
