@@ -8,4 +8,16 @@
 ## Spesifikasi
 Buatlah sebuah aplikasi nodejs sederhana yang dapat menampilkan nama-nama user yang memiliki todo yang belum selesai, kemudian tampilkan 2 post pertama dari user tersebut dengan memanfaatkan api [**berikut**](https://jsonplaceholder.typicode.com/)
 
-## Petunjuk Penggunaan
+## PREREQUISITE
+1. Node Js 
+(https://nodejs.org/en/download/)
+2. Axios 
+(http://zetcode.com/javascript/axios/)
+
+## Petunjuk penggunaan
+# Simple GET Request to endpoint
+    const axios = require('axios');
+ 
+    axios.get('http://webcode.me').then(resp => {
+      console.log(resp.data);
+    });
