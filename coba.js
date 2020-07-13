@@ -31,7 +31,7 @@ async function mainProgram(){
                 console.log("Post:");
                 let num = 0;
                 posts.forEach(post => {
-                    if(status.id==post.userId){
+                    if(status.id==post.userId && !data.completed){
                         if(num!=2){
                             num++;
                             console.log(num+". title: "+post.title);
