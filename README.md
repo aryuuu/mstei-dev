@@ -10,5 +10,6 @@ Buatlah sebuah aplikasi nodejs sederhana yang dapat menampilkan nama-nama user y
 
 ## Petunjuk Penggunaan
 1. Install Node.js dan Axios
-2. Buka file index.js dengan CMD
-3. Jalankan, dan akan terlihat data
+2. Download semua file disini
+3. Buka file index.js dengan node js (bisa melalui cmd)
+4. Jalankan, dan akan terlihat data yang diinginkan
