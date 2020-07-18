@@ -12,3 +12,5 @@ Buatlah sebuah aplikasi nodejs sederhana yang dapat menampilkan nama-nama user y
 
 Install dahulu axios npm
 Contoh pada terminal : $ npm install axios
+Lalu install juga node js
+Jalankan dengan perintah: node app.js
