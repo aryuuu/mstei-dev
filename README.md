@@ -11,3 +11,12 @@ Buatlah sebuah aplikasi nodejs sederhana yang dapat menampilkan nama-nama user y
 Tampilkan hasil fetch API ke suatu halaman web (HTML), format penampilan bebas asal terbaca dg jelas. 
 
 ## Petunjuk Penggunaan
+Untuk menjalankan aplikasi pada Task 2 :
+1. Download seluruh file pada folder Task 2
+2. Buka terminal pada folder tersebut
+3. Install axios dengan 'npm i axios' command
+4. Jalankan file pada terminal dengan menuliskan 'node app.js'
+
+Untuk menjalankan Task 3 :
+1. Download seluruh file pada folder 'Task 3'
+2. Buka file 'task3.html' pada browser
