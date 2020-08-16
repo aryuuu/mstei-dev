@@ -1,0 +1,15 @@
+.list-group-item{
+    background-color: #cbd9a3;
+}
+
+.card{
+    background-color: #f3faf1
+}
+
+#title{
+    padding:1.25rem;
+    font-size: 2rem;
+    background-color: #f3faf1;
+    margin-bottom: 0;
+    font-weight: bolder;
+}
