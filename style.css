@@ -1,0 +1,56 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: Century Gothic;
+}
+
+.all-container{
+    width: auto;
+    height:100vh;
+    background-image: linear-gradient(rgba(1, 1, 1, 0.8),rgba(0, 0, 0, 0.6)),url("background-image.jfif");
+    background-size: cover;
+    color: whitesmoke;
+}
+
+.all-container .header{
+    background-color: rgba(191, 207, 161, 0.144);
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.line{
+    background-color: white;
+    height: 1px;
+}
+
+.header a{
+    text-decoration: none;
+    margin: 10px 5px;
+    color: whitesmoke;
+    padding: 5px 20px;
+    transition: 0.3s ease;
+}
+
+.body{
+    padding: 5px;
+}
+#table{
+    border-collapse: collapse;
+    margin: 10px 10px;
+}
+
+#table th,td{
+    background-color: rgba(45, 46, 43, 0.8);
+    width: auto;
+    border: 1px solid whitesmoke;
+    padding: 2px 2px;
+}
+
+#table th{
+    text-align: left;
+}
+
+a:hover{
+    background-color: whitesmoke;
+    color :black;
+}

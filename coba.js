@@ -1,17 +1,15 @@
-const axios = require('axios');
-
 const baseUrl = 'https://jsonplaceholder.typicode.com'
 
 function makeGetRequestToDo() {
-    return axios.get(baseUrl + '/todos').then(res  => { return res.data }).catch(err => {return err});    
+    return fetch(baseUrl + '/todos').then(res => res.json()).then(res  => { return res }).catch(err => {return err});  
 }
 
 function makeGetRequestUser() {
-    return axios.get(baseUrl + '/users').then(res  => { return res.data }).catch(err => {return err});      
+    return fetch(baseUrl + '/users').then(res => res.json()).then(res  => { return res }).catch(err => {return err});      
 }
 
 function makeGetRequestPost() {
-    return axios.get(baseUrl + '/posts').then(res  => { return res.data }).catch(err => {return err});      
+    return fetch(baseUrl + '/posts').then(res => res.json()).then(res  => { return res }).catch(err => {return err});      
 }
 
 async function mainProgram(){
@@ -19,33 +17,34 @@ async function mainProgram(){
         let datas = await makeGetRequestToDo();
         let response = await makeGetRequestUser();
         let posts = await makeGetRequestPost();
-        response.forEach(status => {
+        console.log(datas[1])
+        var table = "<tr><th>Name</th><th>Title</th><th>Body</th></tr>";
+        response.forEach(function(status){
             let count = 0;
-            datas.forEach(data => {
+            datas.forEach(function(data){
                 if(data.userId==status.id){
                     count++;
                 }
             });
             if(count>=10){
-                console.log("Nama: "+status.name);
-                console.log("Post:");
                 let num = 0;
-                posts.forEach(post => {
-                    if(status.id==post.userId && !data.completed){
-                        if(num!=2){
+                posts.forEach(function(post){
+                    if(status.id==post.userId){
+                        if(num<2){
                             num++;
-                            console.log(num+". title: "+post.title);
-                            console.log("   body : "+post.body);
-                            console.log("\n");
+                            table+="<tr><td>" + status.name + "</td>";
+                            table+="<td>" + post.title + "</td>"
+                            table+="<td>" + post.body + "</td></tr>"
                         }
                     }
                 });
             }
             count = 0;
         });
+        document.getElementById("table").innerHTML=table
+        document.getElementById("main").style.height="auto"
     }
     catch(err){
         console.log(err);
     }
 }
-mainProgram();
