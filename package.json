@@ -1,0 +1,23 @@
+{
+  "name": "mstei",
+  "version": "1.0.0",
+  "description": "* Fork repositori ini * Buat aplikasi dengan mengikuti spesifikasi di bawah * Edit bagian petunjuk penggunaan pada readme * Kirimkan merge request",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aryuuu/mstei-dev.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aryuuu/mstei-dev/issues"
+  },
+  "homepage": "https://github.com/aryuuu/mstei-dev#readme",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
+}

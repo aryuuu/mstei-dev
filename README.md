@@ -6,7 +6,8 @@
 * Kirimkan merge request
 
 ## Spesifikasi
-Buatlah sebuah aplikasi nodejs sederhana yang dapat menampilkan nama-nama user yang memiliki todo yang belum selesai, kemudian tampilkan 2 post pertama dari user tersebut dengan memanfaatkan api [**berikut**](https://jsonplaceholder.typicode.com/)
+Buatlah sebuah aplikasi nodejs sederhana yang dapat menampilkan nama-nama user yang memiliki **10 atau lebih** todo yang belum selesai, kemudian tampilkan 2 post pertama dari user tersebut dengan memanfaatkan api [**berikut**](https://jsonplaceholder.typicode.com/)
+
 
 ## Petunjuk Penggunaan
 
@@ -14,3 +15,7 @@ Install dahulu axios npm
 Contoh pada terminal : $ npm install axios
 Lalu install juga node js
 Jalankan dengan perintah: node app.js
+
+Tampilkan hasil fetch API ke suatu halaman web (HTML), format penampilan bebas asal terbaca dg jelas. 
+
+
