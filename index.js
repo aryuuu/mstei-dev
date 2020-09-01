@@ -1,22 +1,43 @@
 const axios = require('axios');
 
-const apiUrl = 'https://jsonplaceholder.typicode.com';
+const Url = 'https://jsonplaceholder.typicode.com/';
 
-const getPosts = async () => {
+const getUser = () => {
+  return axios.get(Url + 'users').then(res => {return res.data}).catch(err=>{return err});
+}
+
+const getToDo = () => {
+  return axios.get(Url + 'todos').then(res => {return res.data}).catch(err=>{return err});
+}
+
+const getPost = () => {
+  return axios.get(Url + 'posts').then(res => {return res.data}).catch(err=>{return err});
+}
+
+const main = async () => {
   try {
-    const { data: todos } = await axios.get(`${apiUrl}/todos`);
-    todos.forEach( async (todo) => {
+    const users = await getUser();
+    const todos = await getToDo();
+    const posts = await getPost();
+
+    const userToDo = [0,0,0,0,0,0,0,0,0,0];
+
+    todos.forEach((todo) => {
       if (!todo.completed) {
-        const { data: user } = await axios.get(`${apiUrl}/users/${todo.userId}`);
-        const { data: posts } = await axios.get(`${apiUrl}/posts?userId=${todo.userId}`);
-        console.log(`username: ${user.name}`);
-        posts.slice(0,2).forEach((post, index) => {
-          console.log(`post ${index+1}: ${post.body}`)
-        })
+        userToDo[todo.userId-1]++;
       }
-    })
-  } catch (err) {
+    });
+    
+    console.log("List nama-nama user yang memiliki 10 atau lebih todo yang belum selesai");
+    users.forEach((user) => {
+      if(userToDo[user.id-1] >= 10){
+        console.log(`Nama User : ${user.name}`);
+      }
+    });
+  } 
+  catch (err) {
     console.log(err);
   }
 }
-getPosts();
+
+main();
