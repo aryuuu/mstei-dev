@@ -12,19 +12,17 @@ function makeGetRequest(endpoint, query) {
 }
 
 async function app() {
-  let user = await makeGetRequest('users');
-  let todos = await makeGetRequest('todos', 'completed=false');
-  let posts = await makeGetRequest('posts');
+  const user = await makeGetRequest('users');
+  const todos = await makeGetRequest('todos', 'completed=false');
+  const posts = await makeGetRequest('posts');
 
   user.forEach(users => {
-
     let count = 0;
     todos.forEach(todo => {
       if (users.id == todo.userId) {
         count++;
       }
     })
-
 
     if (count > 9) {
       let max_2 = 0;
@@ -37,12 +35,9 @@ async function app() {
           console.log("\n");
           max_2++;
         }
-
       })
     }
-
   })
 }
-
 
 app();

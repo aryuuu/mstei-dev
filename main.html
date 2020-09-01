@@ -1,0 +1,72 @@
+<html lang="en">
+
+<head>
+    <meta name="author" content="Jafar">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas menampilkan Post</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            margin: 20px;
+            text-align: center;
+        }
+
+        .box {
+            margin: 30px;
+            padding: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Uncompleted tasks > 10</h2>
+    <div id='output' class="box"></div>
+    <script>
+        const main = async () => {
+            const user = await fetch('https://jsonplaceholder.typicode.com/users').then(response => response.json());
+            const todos = await fetch('https://jsonplaceholder.typicode.com/todos?completed=false').then(response => response.json());
+            const posts = await fetch("https://jsonplaceholder.typicode.com/posts").then(response => response.json());
+
+            var output = ''; // inisialiasi untuk output ke struktur html
+
+            user.forEach(users => {
+                let count = 0;
+                todos.forEach(todo => {
+                    if (users.id == todo.userId) {
+                        count++;
+                    }
+                })
+
+                if (count > 9) {
+                    let max_2 = 0;
+                    output += `<h3><b>Nama : </b>${users.name}</h2>`;
+                    output += '<h4>Posts : </h3>';
+                    console.log("Nama : " + users.name);
+                    console.log("Posts : ");
+                    posts.forEach(post => {
+                        if (users.id === post.userId && (max_2 < 2)) {
+                            output += `<p><b>Title</b> : ${post.title}</p>`;
+                            output += `<p><b>Body : </b> ${post.body}</p><br>`;
+                            console.log('Title : ' + post.title);
+                            console.log("Body : " + post.body);
+                            console.log("\n");
+                            max_2++;
+                        }
+                    })
+                }
+            })
+            document.getElementById('output').innerHTML = output;
+        };
+
+        main();
+    </script>
+</body>
+
+</html>
