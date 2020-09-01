@@ -1,0 +1,21 @@
+{
+  "name": "mstei-dev",
+  "version": "1.0.0",
+  "description": "Tugas 2 dan 3",
+  "main": "server.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "axios",
+    "express"
+  ],
+  "author": "Muhammad Azhar Faturahman",
+  "license": "ISC"
+}
