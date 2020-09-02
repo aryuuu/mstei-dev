@@ -45,12 +45,31 @@
             background-color: #393939;
             color: #e8e8e8;
         }
+
+        /* Footer */
+        #name{
+            background-color: #e0e0e0;
+        }
+        #name div p{
+            width:100%;
+            margin-bottom: -10px;
+            padding: 10px 0 20px 0;
+            font-family: 'Roboto Slab', serif;
+            font-size: 16px;
+            text-align: center;
+            color: #242424;
+        }
     </style>
 </head>
 <body>
     <div id="header" class="pt-3 pb-3">
         <div class="container">
-        <h1 id="header-text">Naufal Izza</h1>
+        <h1 id="header-text">Tugas 3 MSTEI Dev</h1>
+        </div>
+    </div>
+    <div id="name">
+        <div class = "container justify-content-center">
+            <p>oleh Naufal Izza (IF'19 - 13519088)</p>
         </div>
     </div>
     <div id="nav" class="pt-2 pb-2">
@@ -67,9 +86,9 @@
         </div>
     </div>
     <div class="pt-2"></div>
+   
 
-    <!-- <button id="show" style="">Show Data</button> -->
-    
+        
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
     <script>
         function remove(){
@@ -84,7 +103,8 @@
             const todos = await todosRes.json();
 
             const userRes = await fetch("https://jsonplaceholder.typicode.com/users");
-            const users = await userRes.json();            
+            const users = await userRes.json();
+                        
             
 
             var userNowId = 0;
@@ -106,12 +126,22 @@
 
             var onListIdxNow = 0;
             var userName;
+            var twoPost
             for (let user of users){
                 if (user.id==idOnList[onListIdxNow]){
+                    let postUrl="https://jsonplaceholder.typicode.com/posts?userId="+user.id;
+                    let postRes = await fetch(postUrl);
+                    let posts = await postRes.json();
+                    console.log("success");
                     userName = document.createElement('p');
-                    userName.style = "text-align: center";
-                    userName.innerHTML = user.name;
+                    userName.style = "text-align: center;font-size:1.5em";
+                    userName.innerHTML = "<b>"+user.name+"</b>";
                     document.body.append(userName);
+
+                    twoPost = document.createElement('p');
+                    twoPost.style = "text-align: center";
+                    twoPost.innerHTML = "<b>[2 Judul Pertama]</b><br> >"+posts[0].title+"< <br> > "+posts[1].title+"< <br><br><br>";
+                    document.body.append(twoPost);
                     onListIdxNow+=1;
                 }
             }
