@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas 3 MSTEI Dev</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto+Slab&display=swap" rel="stylesheet"> 
+
+    <style>
+        /* Header */
+        #header{
+            background-color: #393939;
+        }
+
+        #header-text{
+            font-family: 'Roboto Slab', serif;
+            font-size: 60px;
+            font-weight: 900;
+            text-align: center;
+            color: #f5f5f5;
+        }
+
+        /* Navigation */
+        #nav{
+            background-color: #f5f5f5;
+            font-family: 'Poppins', sans-serif;
+            font-weight: lighter;
+        }
+        .nav-link{
+            font-size: 0.95em;
+            background-color: #e8e8e8;
+            margin: 8px 20px;
+            padding: 8px 24px !important;
+            border-radius: 50px;
+        }
+        .nav-link:hover{
+            background-color: #393939;
+            color: #e8e8e8;
+        }
+        .active{
+            background-color: #393939;
+            color: #e8e8e8;
+        }
+    </style>
+</head>
+<body>
+    <div id="header" class="pt-3 pb-3">
+        <div class="container">
+        <h1 id="header-text">Naufal Izza</h1>
+        </div>
+    </div>
+    <div id="nav" class="pt-2 pb-2">
+        <div class="container">
+            <ul class="nav justify-content-center">
+                <li id="show">
+                  <p style="text-align: center;">Tekan "Tampilkan Data" untuk melihat<br>daftar orang yang memiliki<br>"unfinished To-Do" >= 10</p>
+                  <a class="nav-link" aria-current="page" href="#" style="text-align: center;">Tampilkan Data</a>
+                </li>
+                <li class="nav-item pt-3" id="text"  style="display: none;">
+                  <p>Daftar orang yang memiliki "unfinished To-Do" >= 10</p>
+                </li>  
+            </ul>
+        </div>
+    </div>
+    <div class="pt-2"></div>
+
+    <!-- <button id="show" style="">Show Data</button> -->
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+    <script>
+        function remove(){
+            document.getElementById("show").style.display = "none";
+            document.getElementById("text").style.display = "inline";
+            parseTodos();
+        }
+        
+
+        async function parseTodos(){
+            
+            const todosRes = await fetch("https://jsonplaceholder.typicode.com/todos?completed=false");
+            const todos = await todosRes.json();
+
+            const userRes = await fetch("https://jsonplaceholder.typicode.com/users");
+            const users = await userRes.json();            
+            
+            console.log(todos[0].userId);
+            console.log(users[0].id);
+
+            var userNowId = 0;
+            var counter = 0;
+            var idOnList = [];
+            for (let todo of todos){
+                if (todo.userId>userNowId || userNowId==todos[todos.length-1].userId){
+                    if (counter >= 10){
+                        idOnList.push(userNowId)
+                    }
+                    //console.log("User Id: " + userNowId +"-> "+ counter);
+                    if (userNowId!=todos[todos.length-1].userId){
+                        console.log("User Id: " + userNowId +"-> "+ counter);
+                        userNowId+=1;
+                        counter = 0;
+                    }
+                }
+                counter+=1;
+            }
+            console.log("User Id: " + userNowId +"-> "+ (counter-1));
+            console.log(idOnList);
+
+            var onListIdxNow = 0;
+            var userName;
+            for (let user of users){
+                //console.log(user.name);
+                if (user.id==idOnList[onListIdxNow]){
+                    console.log("id: "+user.id+" = "+user.name);
+                    userName = document.createElement('p');
+                    userName.style = "text-align: center";
+                    userName.innerHTML = user.name;
+                    document.body.append(userName);
+                    onListIdxNow+=1;
+                }
+            }
+
+        }
+
+        // document.getElementById("show").onclick = parseTodos();
+        document.getElementById("show").addEventListener('click', remove);
+    </script>
+</body>
+</html>
