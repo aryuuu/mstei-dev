@@ -11,3 +11,6 @@ Buatlah sebuah aplikasi nodejs sederhana yang dapat menampilkan nama-nama user y
 Tampilkan hasil fetch API ke suatu halaman web (HTML), format penampilan bebas asal terbaca dg jelas. 
 
 ## Petunjuk Penggunaan
+1. install [node.js](https://nodejs.org)
+2. untuk Windows: buka file "run.bat" ; untuk Mac OS/Linux: buka terminal, arahkan ke direktori file, ketikkan command "node server"
+3. ikuti perintah pada konsol, atau kunjungi "[http://localhost:3000](http://localhost:3000)" (default)
