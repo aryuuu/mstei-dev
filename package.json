@@ -1,0 +1,24 @@
+{
+  "name": "mstei-dev",
+  "version": "1.0.0",
+  "description": "* Fork repositori ini\r * Buat aplikasi dengan mengikuti spesifikasi di bawah\r * Edit bagian petunjuk penggunaan pada readme\r * Kirimkan merge request",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syahrizailm/mstei-dev.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/syahrizailm/mstei-dev/issues"
+  },
+  "homepage": "https://github.com/syahrizailm/mstei-dev#readme",
+  "devDependencies": {
+    "fs": "0.0.1-security",
+    "http": "0.0.1-security",
+    "url": "^0.11.0"
+  }
+}
