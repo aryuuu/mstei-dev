@@ -1,122 +1,58 @@
-//Mengambil data todo user
-fetch('https://jsonplaceholder.typicode.com/todos')
+//Get all user id
+fetch('https://jsonplaceholder.typicode.com/users')
   .then(response => response.json())
-  .then(data => show(data));
+  .then(data => show(data))
+  .catch(error => console.log('Error:', error));
 
-//Fungsi yang akan menampilkan nama dan pos user
 function show(data){
-  //Mencari userId yang todonya false lebih dari/sama dengan 10
-  var belumSelesai=[]; //var yang akan menyimpan userId
-  var i = 1;
-  do{
-    var todo=data.filter(value=>
-      value.userId==i); //filter terhadap userid
-    var todoFalse=todo.filter(element=>
-      element.completed==false);
-    if (todoFalse.length>=10){//user yang todo false >=10
-      belumSelesai.push(i)
-    };
-    i++;
-  }while (todo.length!=0) //stop jika i melebihi user id yang dipunya
-  console.log(belumSelesai)
+  let userIds = [] //menyimpan user id
+  let nama = {} //menyimpan nama
+  data.forEach(element => { //memasukkan user id dri tiap user
+    userIds.push(element.id);
+    nama[element.id] = element.name;
+  });
   
-  //Mengambil list user
-  fetch('https://jsonplaceholder.typicode.com/users')
+  var lebihSepuluh = [] //menyimpan user id yang not completed todos lebih dari 10
+  //Mengecek todos dari user'
+  fetch("https://jsonplaceholder.typicode.com/todos")
     .then(response => response.json())
-    .then(user => cariNama(user));
-  //Mencari nama user berdasarkan id
-  function cariNama(user){
-    var nama = [];
-      belumSelesai.forEach(element => 
-        //id user dimulai dari 1 sehingga
-        nama.push(user[element-1].name));
-    //Mengambil post user
-    fetch('https://jsonplaceholder.typicode.com/posts')
-    .then(response => response.json())
-    .then(user => cariPost(user));
-    //Fungsi yang mencari post user berdasarkan id
-    function cariPost(user){
-      var postUser = {
-        "Nama":[],
-        "TitlePos1":[],
-        "IsiPos1":[],
-        "TitlePos2":[],
-        "IsiPos2":[],
-      };
-      postUser.Nama=nama
-      belumSelesai.forEach(function(element){//mengambil informasi post
-        var i = 0;
-        for (;i<user.length;i++){
-          var individu=user[i];
-          if (individu.userId==element){
-            postUser.TitlePos1.push(individu.title);
-            postUser.IsiPos1.push(individu.body);
-            postUser.TitlePos2.push(user[i+1].title);
-            postUser.IsiPos2.push(user[i+1].body);
-            break;
-          };
-        };
-      })
-      //Menampilkan dengan html
-      var i = 0;
-      var tampilkan = document.getElementById("root");
-      //Membuat tabel yang mengandung semua atribut yang diminta
-      for (;i<belumSelesai.length;i++){
-        //wrapper dari tabel
-        var wrapper = document.createElement("div");
-        wrapper.classList.add("table-wrapper");
-        //Tabel 
-        var tabel = document.createElement("table");
-        tabel.classList.add("fl-table");
-        //Judul Tabel
-        var capt = document.createElement("caption");
-        var captText=document.createTextNode("User "+(i+1));
-        capt.appendChild(captText);
-        tabel.appendChild(capt);
-        //Head dan Body dari tabel
-        var thead = document.createElement("thead");
-        var tbody = document.createElement("tbody");
-
-        // Head
-        var tr = document.createElement("tr");
-
-        var th = document.createElement("th");
-        var thIndex = document.createTextNode("Atribut User");
-        th.appendChild(thIndex);
-        tr.appendChild(th);
-
-        var th = document.createElement("th");
-        var thIsi = document.createTextNode("Data User");
-        th.appendChild(thIsi);
-        tr.appendChild(th);
-
-        thead.appendChild(tr);
-        tabel.appendChild(thead);
-        
-        //Body
-        var atr=["Nama User","Judul Pos 1","Isi Pos 1","Judul Pos 2","Isi Pos 2"]
-        var nomorAtr = 0
-        for(x in postUser){//loop untuk setiap atribut
-          var tr = document.createElement("tr");
-
-          var td = document.createElement("td");
-          var isiIndex = document.createTextNode(atr[nomorAtr]);
-          td.appendChild(isiIndex);
-          tr.appendChild(td);
-
-          var td = document.createElement("td");
-          var isiNama = document.createTextNode(postUser[x][i]);
-          td.appendChild(isiNama);
-          tr.appendChild(td);
-
-          tbody.appendChild(tr);
-          tabel.appendChild(tbody);
-          wrapper.appendChild(tabel);
-          tampilkan.appendChild(wrapper );
-
-          nomorAtr+=1;
+    .then(todos => {
+      userIds.forEach(idUser => {
+        const userTodos = todos.filter(element => element.userId === idUser)
+        let falseTodos = userTodos.filter(todo => todo.completed === false) //cek false todos
+        if (falseTodos.length>=10){ //jika lebih dari 10
+          lebihSepuluh.push(idUser);
         }
-      }
-    };
-  };
+      })
+    })
+    .catch(error => console.log('Error:', error));
+
+  console.log(lebihSepuluh);
+
+  //Mengambil informasi user
+  fetch("https://jsonplaceholder.typicode.com/posts")
+  .then(response => response.json())
+  .then(posts => {
+    lebihSepuluh.forEach(idUser => { //menambahkan isi tabel
+      const userPosts = posts.filter(element => element.userId === idUser);
+      let userInfo = {}; //menyimpan isi tabel
+      userInfo["Id"] = idUser;
+      userInfo["Nama User"] = nama[idUser];
+      userInfo["Title Pos 1"] = userPosts[0].title;
+      userInfo["Isi Pos 1"] = userPosts[0].body;
+      userInfo["Title Pos 2"] = userPosts[1].title;
+      userInfo["Isi Pos 2"] = userPosts[1].body;
+      $(document).ready(function(){
+        var kerangkaTabel = `<div class='table-wrapper'><table class='fl-table' id='${idUser}'></table></div>`
+        $(`#root`).html((i,text) => text+=kerangkaTabel); //membuat tabel
+        $(`#${idUser}`).html(`<thead><tr><th>Atribut User</th><th>Data User</th></tr></thead>`); //header
+        $(`#${idUser}`).html((i,text) => text+=`<tbody id='tbody_${idUser}'></tbody>`); //body
+        Object.entries(userInfo).forEach(element => { //memasukkan isi untuk setiap informasi dari user
+          var isi = `<tr><td>${element[0]}</td><td>${element[1]}</td></tr>`
+          $(`#tbody_${idUser}`).html((i,text) => text+=isi)
+        });
+      });
+    });
+  })
+  .catch(error => console.log('Error:', error));
 };
