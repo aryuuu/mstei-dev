@@ -12,7 +12,7 @@ function show(data){
     nama[element.id] = element.name;
   });
   
-  var lebihSepuluh = [] //menyimpan user id yang not completed todos lebih dari 10
+  let lebihSepuluh = [] //menyimpan user id yang not completed todos lebih dari 10
   //Mengecek todos dari user'
   fetch("https://jsonplaceholder.typicode.com/todos")
     .then(response => response.json())
@@ -26,8 +26,6 @@ function show(data){
       })
     })
     .catch(error => console.log('Error:', error));
-
-  console.log(lebihSepuluh);
 
   //Mengambil informasi user
   fetch("https://jsonplaceholder.typicode.com/posts")
@@ -43,12 +41,12 @@ function show(data){
       userInfo["Title Pos 2"] = userPosts[1].title;
       userInfo["Isi Pos 2"] = userPosts[1].body;
       $(document).ready(function(){
-        var kerangkaTabel = `<div class='table-wrapper'><table class='fl-table' id='${idUser}'></table></div>`
+        let kerangkaTabel = `<div class='table-wrapper'><table class='fl-table' id='${idUser}'></table></div>`
         $(`#root`).html((i,text) => text+=kerangkaTabel); //membuat tabel
         $(`#${idUser}`).html(`<thead><tr><th>Atribut User</th><th>Data User</th></tr></thead>`); //header
         $(`#${idUser}`).html((i,text) => text+=`<tbody id='tbody_${idUser}'></tbody>`); //body
         Object.entries(userInfo).forEach(element => { //memasukkan isi untuk setiap informasi dari user
-          var isi = `<tr><td>${element[0]}</td><td>${element[1]}</td></tr>`
+          let isi = `<tr><td>${element[0]}</td><td>${element[1]}</td></tr>`
           $(`#tbody_${idUser}`).html((i,text) => text+=isi)
         });
       });
